@@ -152,3 +152,67 @@ for item in ranges:
     print(item)
 else:   #当循环语句没有执行执行break就会进入else
     print('全部遍历完成')
+
+
+
+#list
+lis=['aa','bb',11,'dd','ff']
+lis2=['hh','ii']
+lis.append('gg')
+#将lis2全部添加到lis
+lis.extend(lis2)
+#在索引为0的位置增加一个zero,后面的索引依次往后移
+lis.insert(0,'zero')
+print(type(lis))
+print(lis[0])
+#倒数第三个索引的值
+print(lis[-3])
+#bb在lis中的索引，当有多个重复元素时只返回第一个 ，若没有此元素则抛异常
+print(lis.index('bb'))
+#在索引1到4，不包括4中查找dd的索引位置，若找不到则抛异常
+print(lis.index('dd',1,5))
+#切片，从lis的1索引开始，4索引结束(不包含4索引),跨度为2进行遍历,默认step跨度为1,切割出来的为新对象，与原id(内存地址)不一样
+print(lis[1:4:2])
+#start默认为0
+print(lis[:4:2])
+#stop默认为last
+print(lis[1::1])
+#start默认、stop默认,step=-1，元素逆序输出
+print(lis[::-1])
+print(lis[4:0:-1])
+
+lis3=[11,22,33,44]
+lis4=[666,777,888]
+#修改3索引的值
+lis3[3]=66
+print(lis3[1:])
+#将1索引后的数据切掉，1索引后面的值替换成33,44,55 或 list4
+lis3[1::1]=[33,44,55]
+lis3[1:]=lis4
+print(lis3)
+#在原列表的基础上进行排序，即排序前后内存地址一样
+lis3.sort()
+#降序排序
+lis3.sort(reverse=True)
+#内置函数sorted进行排序会产生一个新的对象
+sorted(lis3)
+#正序排序
+sorted(lis3,reverse=False)
+#从列表中移除首个值为11的元素
+lis3.remove(11)
+print(lis3)
+#删除指定索引的元素，若指定索引不存在则抛异常，若没有参数，则默认删除最后一个元素
+lis3.pop(1)
+print(lis3)
+lis3.pop()
+print(lis3)
+#删除列表元素 或 lis3=[]
+lis3.clear()
+#删除列表
+del lis3
+
+#列表生成式
+#遍历range依次赋值给i，根据i生成列表 或 根据i的平方生成列表
+# i：列表元素的表达式   i：自定义变量   range：可迭代对象
+lis5=[i for i in range(10)]
+lis5=[i*i for i in range(10)]
