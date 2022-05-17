@@ -218,35 +218,109 @@ lis5 = [i * i for i in range(10)]
 # 字典  创建有两种方式
 dic = {'刘思远': 24, '张三': 10}
 print(type(dic))
-#使用内置函数创建, = 左边为key不加引号，右边取决于数据类型
+# 使用内置函数创建, = 左边为key不加引号，右边取决于数据类型
 student = dict(name='刘思远', age=24)
 print(dic)
 print(student)
-#获取字典中的值,若查找的值不存在,[] 方式会报错，get()不会
+# 获取字典中的值,若查找的值不存在,[] 方式会报错，get()不会
 print(dic['刘思远'])
 print(student['name'])
 print(student.get('name'))
-#get的第二个参数是默认值
-print(student.get('gender','男'))
-#判断是否存在与字典中
+# get的第二个参数是默认值
+print(student.get('gender', '男'))
+# 判断是否存在与字典中
 print('张三' in dic)
 print('张三疯' not in dic)
-#删除
+# 删除
 del dic['张三']
-#新增
-dic['张三丰']=90
+# 新增
+dic['张三丰'] = 90
 print(dic)
-#获取所有键/值/键值对
+# 获取所有键/值/键值对
 print(dic.keys())
 print(dic.values())
 print(dic.items())
-#遍历
+# 遍历
 for item in dic:
     print(item)
 
-#将items和price一一对应组合成字典    使用zip函数压缩，以短的元素为基准生成字典
-items=['fruit','books','others']
-prices=[99,88,77]
-#upper()转换为大写
-d = {item.upper():price for item,price in zip(items,prices)}
+# 将items和price一一对应组合成字典    使用zip函数压缩，以短的元素为基准生成字典
+items = ['fruit', 'books', 'others']
+prices = [99, 88, 77]
+# upper()转换为大写
+d = {item.upper(): price for item, price in zip(items, prices)}
 print(d)
+
+# 元组  （和字符串一样都为不可变序列 即没有增删改）  相当于Java 的 final
+# 元组  和列表相似，只不过元祖为()  列表为[],元祖不能进行增删改
+t = ('aa', 'bb', 'cc')
+# 若元祖只有一个元素， 逗号不能省
+t3 = ('aa',)
+# 使用内置函数创建
+t1 = tuple(('aa', 'bb', 'cc'))
+print(type(t), id(t))
+# 获取元组元素
+print(t[0])
+print(t[1])
+print(type(t1), id(t1))
+
+# 集合 （集合是和字典相同的数据结构，无序排列，只有key（相当于java的set），自动去重）
+s = {'a', 'b', 'c', 'c', 'c'}
+print(s)
+# 将range转为set
+s1 = set(range(6))
+print(type(s1))
+# 将列表转为集合
+s1 = set([10, 2, 3, 4, 4, 4])
+print(s1)
+# 集合元素的判断操作
+print(2 in s1)
+print(2 not in s1)
+# add() 一次添加一个元素
+s1.add(11)
+# update() 一次至少添加一个元素(可添加列表、元组、集合)
+s1.update({12, 13})
+s1.update([14, 15])
+s1.update((17, 16))
+print(s1)
+# 集合元素的删除操作,若remove一个不存在的元素，会抛异常
+s1.remove(11)
+print(s1)
+# 集合元素的删除操作,若有元素则删除，没有则不抛异常
+s1.discard(11)
+# 一次只删除一个任意元素
+s1.pop()
+print(s1)
+# 清空集合
+s1.clear()
+print(s1)
+
+s1 = {11, 22, 33, 55, 44}
+s2 = {22, 11, 33, 44, 55}
+# 若集合存储内容相同，则为true，与顺序无关
+print(s1 == s2)  # true
+
+s3 = {11, 44}
+# s3是否为s1的子集
+print(s3.issubset(s1))
+# s1是否为s3的超集
+print(s1.issuperset(s3))
+# s1和s3是否 没有 交集
+print(s1.isdisjoint(s3))
+s3 = {11, 12, 22}
+# 输出s1和s3的交集
+print(s1.intersection(s3))
+print(s1 & s3)
+# s1和s3的并集
+print(s1.union(s3))
+print(s1 | s3)
+# s1与s3的差集
+print(s1.difference(s3))
+print(s1-s3)
+#s1和s2的对称差集(与交集相反)
+print(s1.symmetric_difference(s3))
+print(s1^s3)
+
+#集合生成式(跟列表生成式的不同是 为花括号{})
+lis={ i*i for i in range(6)}
+print(lis)
