@@ -367,7 +367,7 @@ print(s.zfill(20))
 print(s.split(sep='o',maxsplit=1))
 print(s.rsplit(sep='o',maxsplit=1))
 
-str = 'bbb'
+str = 'bbb ccceee'
 # isidentifier() 判断字符串是否为合法的标识符
 print(str.isidentifier())
 # isalnum 判断指定字符串是否全部由空白字符组成(回车、换行\n、水平制表符\t)
@@ -380,3 +380,31 @@ print(str.isdecimal())
 print(str.isnumeric())
 # isalnum 判断指定字符串是否全部由字母和数字组成
 print(str.isalnum())
+
+
+# replace 第一个参数指定被替换的字串，第二个参数指定替换子串的字符串，返回的是替换后得到的字符串
+newstr = str.replace('bc','ww')
+print(newstr)
+# 将列表元素或元组中的字符串合并成一个字符串
+aa = ('z','x')
+print('|'.join(aa))
+
+# 查找子串substr第一次出现的位置，若查找的子串不存在时抛出ValueError
+print(str.index('c'))
+# 查找子串substr最后一次出现的位置，若查找的子串不存在时抛出ValueError
+print(str.rindex('c'))
+# 查找子串substr第一次出现的位置，若查找的子串不存在时返回-1
+print(str.find('g'))
+# 查找子串substr最后一次出现的位置，若查找的子串不存在时返回-1
+print(str.rfind('g'))
+# upper 所有字符转为大写
+print(str.upper())
+# upper 所有字符转为小写
+print(str.lower())
+# swapcase 把所有大写字符转小写，小写转大写
+print(str.swapcase())
+# capitalize 把第一个字符转为大写，把其余字符转为小写
+print(str.capitalize())
+# title 把每个单词的第一个字符转为大写，把每个单词的剩余字符转为小写
+print(str.title())
+
