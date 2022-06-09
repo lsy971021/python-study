@@ -366,3 +366,17 @@ print(s.zfill(20))
 # rsplit 从右侧分割，效果同split
 print(s.split(sep='o',maxsplit=1))
 print(s.rsplit(sep='o',maxsplit=1))
+
+str = 'bbb'
+# isidentifier() 判断字符串是否为合法的标识符
+print(str.isidentifier())
+# isalnum 判断指定字符串是否全部由空白字符组成(回车、换行\n、水平制表符\t)
+print(str.isspace())
+# isalnum 判断指定字符串是否全部由字母组成
+print(str.isalpha())
+# isalnum 判断指定字符串是否全部由十进制的数字组成
+print(str.isdecimal())
+# isalnum 判断指定字符串是否全部由数字组成
+print(str.isnumeric())
+# isalnum 判断指定字符串是否全部由字母和数字组成
+print(str.isalnum())
