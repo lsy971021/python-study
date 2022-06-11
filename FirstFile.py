@@ -317,16 +317,16 @@ print(s1.union(s3))
 print(s1 | s3)
 # s1与s3的差集
 print(s1.difference(s3))
-print(s1-s3)
-#s1和s2的对称差集(与交集相反)
+print(s1 - s3)
+# s1和s2的对称差集(与交集相反)
 print(s1.symmetric_difference(s3))
-print(s1^s3)
+print(s1 ^ s3)
 
-#集合生成式(跟列表生成式的不同是 为花括号{})
-lis={ i*i for i in range(6)}
+# 集合生成式(跟列表生成式的不同是 为花括号{})
+lis = {i * i for i in range(6)}
 print(lis)
 
-#字符串 ， 虽然定义方式不一样，但在内存中的地址是一样的（字符串和元组都为不可变序列）
+# 字符串 ， 虽然定义方式不一样，但在内存中的地址是一样的（字符串和元组都为不可变序列）
 # 字符串的助留机制 仅保存一份相同且不可变的字符串的方式： 优点 ：当需要要值相同的字符串时可以直接从字符串池中拿，避免频繁的创建和销毁
 # 助留机制的几种情况（交互模式：命令交互(在中断执行python3命令打开交互界面)，pyCharm对字符串进行了强制处理，内容相同的会进行助留）：
 #       字符串的长度为0或1时、
@@ -336,36 +336,36 @@ print(lis)
 str1 = 'aa'
 str2 = "aa"
 str3 = '''aa'''
-print(str1,id(str1))
-print(str2,id(str2))
-print(str3,id(str3))
-#sys中的intern方法强制2个字符串指向同一个对象
-str1=sys.intern(str2)
+print(str1, id(str1))
+print(str2, id(str2))
+print(str3, id(str3))
+# sys中的intern方法强制2个字符串指向同一个对象
+str1 = sys.intern(str2)
 print(str1 is str2)
 
-s='a'
-s1='a'
-str4=s+s1
+s = 'a'
+s1 = 'a'
+str4 = s + s1
 print(id(str4))
 # 在需要进行字符串拼接时，建议使用join方法而非+，因为join是先计算出所有字符中的长度，然后再拷贝，只new一次对象，效率比+高
-str5=s.join(s1)
+str5 = s.join(s1)
 print(id(str5))
 
-s='hellow , Python'
+s = 'hellow , Python'
 # center 居中对齐，第一个参数指定宽度，第二个参数指定填充符（可选，默认是空格），若设置宽度小于字符串宽度，则不处理
-print(s.center(20,'*'))
+print(s.center(20, '*'))
 # ljust 左对齐，第一个参数指定宽度，第二个参数指定填充符（可选，默认是空格），若设置宽度小于字符串宽度，则不处理
-print(s.ljust(20,"*"))
+print(s.ljust(20, "*"))
 # rjust 右对齐，参数如上
-print(s.rjust(20,"*"))
+print(s.rjust(20, "*"))
 # zfill 右对齐，左边用0填充，该方法直接收一个参数，用于指定字符串的宽度，若设置宽度小于字符串宽度，则不处理
 print(s.zfill(20))
 # split 分割，默认劈分字符是空格字符串，返回的值是一个列表
 #       参数sep：指定劈分字符串的劈分符
 #       参数maxsplit：指定劈分字符串时最大劈分次数，在经过最大次劈分之后，剩余的子串会作为一部分
 # rsplit 从右侧分割，效果同split
-print(s.split(sep='o',maxsplit=1))
-print(s.rsplit(sep='o',maxsplit=1))
+print(s.split(sep='o', maxsplit=1))
+print(s.rsplit(sep='o', maxsplit=1))
 
 str = 'bbb ccceee'
 # isidentifier() 判断字符串是否为合法的标识符
@@ -381,12 +381,11 @@ print(str.isnumeric())
 # isalnum 判断指定字符串是否全部由字母和数字组成
 print(str.isalnum())
 
-
 # replace 第一个参数指定被替换的字串，第二个参数指定替换子串的字符串，返回的是替换后得到的字符串
-newstr = str.replace('bc','ww')
+newstr = str.replace('bc', 'ww')
 print(newstr)
 # 将列表元素或元组中的字符串合并成一个字符串
-aa = ('z','x')
+aa = ('z', 'x')
 print('|'.join(aa))
 
 # 查找子串substr第一次出现的位置，若查找的子串不存在时抛出ValueError
@@ -408,3 +407,18 @@ print(str.capitalize())
 # title 把每个单词的第一个字符转为大写，把每个单词的剩余字符转为小写
 print(str.title())
 
+# 字符串比较  > < >= <= == !=
+# 与 is的区别 ，is 比较的是id是否相等， 上面的比较的是value值是否相等
+compare1 = 'liusiyuan'
+compare2 = 'liusiyuanliuyifei'
+print(compare1 < compare2)  # true
+print(compare1 > compare2)  # false
+print(compare1 >= compare2)  # false
+print(compare1 <= compare2)  # true
+print(compare1 == compare2)  # false
+print(compare1 != compare2)  # true
+
+# ord 原始值 （21016）
+print(ord('刘'))
+# chr 代表的汉字 ，和上面互为相反
+print(chr(21016))
