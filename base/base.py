@@ -720,12 +720,12 @@ cu.logging1()
 
 print('=========================')
 import schedule
-def schedul1():
+def schedule1():
     schedule.every(1).seconds.do(cu.time1)
     while True:
         # 执行任务
         schedule.run_pending()
         time.sleep(1)
 
-schedul1()
+schedule1()
 
