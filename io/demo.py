@@ -58,13 +58,47 @@ class File:
         picTargetFile.write(content)
         picTargetFile.close()
 
+    def useWith(self):
+        # 使用with 可以不用手动关闭资源
+        # with 之后 as 之前称为上下文资源
+        # with 可以自动管理上下文资源，不论什么原因跳出with 都能确保文件正确的关闭，以此来达到释放资源的目的
+        # 如果一个类实现了特殊方法(会自动执行)： __enter__()、 __exit__ 、 称为该类对象遵守了上下文管理协议，该类对象的实例对象称为上下文管理器
+        with open("../doc/content.txt", 'r') as file:
+            print(file.readline())
+
 
 file = File()
 
 # file.readText(3)
 
-file.writeText('\n test~~~~~')
+# file.writeText('\n test~~~~~')
 
 # file.copyPic('../pic/小男孩_copy.jpg',file.readPic())
 
 # file.readTextForSeek(3)
+
+file.useWith()
+
+
+# 使用with 可以不用手动关闭资源
+        # with 之后 as 之前称为上下文资源
+        # with 可以自动管理上下文资源，不论什么原因跳出with 都能确保文件正确的关闭，以此来达到释放资源的目的
+        # 如果一个类实现了特殊方法(会自动执行)： __enter__()、 __exit__ 、 称为该类对象遵守了上下文管理协议，该类对象的实例对象称为上下文管理器
+class ManageContext:
+    def __enter__(self):
+        print('__enter__被调用了')
+        return self
+    # 就算执行过程中出现异常  也会执行__exit__
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print('__exit__被调用了')
+
+    def show(self):
+        print('show 被调用了')
+
+
+
+def useWith():
+    with ManageContext() as context:
+        context.show()
+
+useWith()
