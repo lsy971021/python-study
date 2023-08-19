@@ -9,7 +9,6 @@ class read:
         print(self.html.read())
         print(self.content.read())
 
-print(read().print())
-
-
+demo_a = read()
+print(demo_a.print())
 

@@ -422,3 +422,298 @@ print(compare1 != compare2)  # true
 print(ord('刘'))
 # chr 代表的汉字 ，和上面互为相反
 print(chr(21016))
+
+# try -- except -- else -- finally
+# except 后可写具体捕获异常的类型
+# 也可以倒入 traceback 来打印异常
+import traceback
+
+
+def func1():
+    try:
+        age = input("请输入你的年龄:")
+        if int(age) > 10:
+            print("成年人")
+    except BaseException as e:
+        print('报错了', e)
+        traceback.print_exc()
+    else:
+        print('程序无bug~')
+    finally:
+        print("finished")
+
+
+# func1()
+
+
+# 面向对象
+# 类 （规范）： 由一个或多个单词组成， 大驼峰
+# 类组成： 类属性、实例方法、静态方法、类方法
+# Student 类可以创建多个Student类的实例对象，每个实例对象的属性值不同
+class Student:
+    # 类属性  使用类名直接访问 ： Student.native_place , 若修该后，所有指向类对象的实例对象的类属性都会修改
+    native_place = 'bj'
+    __private = '私有属性'
+
+    # 初始化方法
+    def __init__(self, name, gender, private='私有属性'):
+        print('初始化方法')
+        # 实例属性
+        self.name = name
+        self.gender = gender
+        self.__private = private
+        print(self.__private)
+
+    # 实例方法 ，类外面定义的称为函数
+    def getName(self):
+        print(name)
+
+    # 静态方法 ，不用加self , 使用类名直接访问 ： Student.staticMethod()
+    @staticmethod
+    def staticMethod():
+        print('我是静态方法')
+
+    # 类方法，使用类名直接访问 ： Student.classMethod()
+    @classmethod
+    def classMethod(cls):
+        print("我是类方法")
+
+    # pass 来占位，防止程序报错
+    pass
+
+
+# 类有内存空间
+print(id(Student))
+print(type(Student))
+print(Student)
+
+# 实例对象
+# 实例名 = 类名()
+a = Student(gender='男', name='刘思远')
+# 实例对象中有类指针指向类对象 ===  实例对象 和 类对象内存地址不一样
+print(id(a))
+print(id(Student))
+
+print(a.name, a.gender)
+
+# 也可以 用 ==》 类.方法(实例名)
+a.getName()
+Student.getName(a)
+
+print(Student.native_place)
+Student.classMethod()
+Student.staticMethod()
+
+# dir ==  输出对象的所有属性、方法
+print(dir(a))
+# 强制访问
+print(a._Student__private)
+print(Student._Student__private)
+
+
+# 继承  object可写可不写
+class Father():
+    def __init__(self, fatherName='father'):
+        self.fatherName = fatherName
+        self.fatherAge = 25
+
+    def getFatherName(self):
+        print('父亲名字是：', self.fatherName)
+
+
+class Mother:
+    def __init__(self, motherName='mother'):
+        self.motherName = motherName
+        self.motherAge = 18
+
+    def getMotherName(self):
+        print('母亲名字是：', self.motherName)
+
+
+# 如果有多个继承，以第一个继承为主
+class Son(Mother, Father):
+    def __init__(self, name='son', age=2):
+        # 如果属性名和父类的一样，则会覆盖
+        self.sonName = name
+        self.sonAge = age
+        # 执行第一个继承的 init方法
+        super().__init__(motherName='bb')
+        # super().__init__(fatherName='aa')
+
+    # 重写父类方法
+    def getMotherName(self):
+        print('重写 getMotherName() 方法')
+
+    def getName(self):
+        print('孩子名字：', self.name)
+
+
+son = Son('gg', 2)
+son.getMotherName()
+
+
+# son.getFatherName()
+
+
+# object 类, 默认所有类都继承obj
+# obj 默认有 __str__ 方法， 当输出一个实例名时候 默认输出内存地址， 重写可更改
+# 特殊属性： _dict_ : 获得类对象或实例对象所绑定的所有属性和方法的字典
+class ObjInfo:
+    obj = 'aaa'
+
+    def __init__(self, name):
+        self.name = name
+        print('__init__方法被执行')
+
+    def __str__(self):
+        return '====='
+
+    # 创建对象时限制性 __new__ 方法
+    # 比如 ：
+    #   a = ObjInfo('lsy')  # 会把ObjInfo 传给参数clas
+    def __new__(cls, *args, **kwargs):
+        print('__new__被调用执行了，cls的id为 {0}'.format(id(cls)))
+        # 此时 ， 把 ObjInfo 传给了 object 里，在 object 里创建了 obj
+        obj = super().__new__(cls)
+        print('创建的对象的id为{0}'.format(id(obj)))
+        # return 的 obj 传给了 __init__ 中的 self
+        return obj
+
+    def obj(self):
+        print("sss")
+
+
+t = ObjInfo('xxx')
+
+print(dir(t))
+
+print("实例对象 __dict__: ", t.__dict__)
+print("类对象 __dict__: ", ObjInfo.__dict__)
+print("对象所属类 __class__: ", t.__class__)
+print("类对象的父类元祖 __class__: ", ObjInfo.__bases__)
+print("类对象的层次结构 __mro__: ", ObjInfo.__mro__)
+print("类对象的子类 __subclasses__: ", ObjInfo.__subclasses__())
+
+print(t)
+
+
+#  多态 (动态语言， 只关心是否有这个方法就行，不用非要继承)
+class Animal(ObjInfo):
+    def eat(self):
+        print("吃饭了～")
+
+
+class Dog(Animal):
+    def eat(self):
+        print("dog 吃饭了~")
+
+
+class Cat(Animal):
+    def eat(self):
+        print("cat 吃饭了~")
+
+
+def fun(animal):
+    animal.eat()
+
+
+a = Dog("aa")
+fun(a)
+
+fun(Cat("bb"))
+
+
+
+#  深、浅 拷贝
+import copy
+class Computer:
+    def __init__(self, desk, cpu):
+        self.desk = desk
+        self.cpu = cpu
+
+
+class Desk:
+    def __init__(self, desk):
+        self.desk = desk
+
+
+class Cpu:
+    def __init__(self, cpu):
+        self.cpu = cpu
+
+
+desk = Desk('APPLE')
+cpu = Cpu('M2 Max')
+computer = Computer(desk, cpu)
+
+# 浅拷贝 ， 实例对象 id 不一样 ，实例属性 id 一样
+computer2 = copy.copy(computer)
+print('computer id = ', id(computer), 'computer2 id = ', id(computer2))
+print('desk id = ', id(computer.desk), 'desk2 id = ', id(computer2.desk))
+
+# 深拷贝 , 实例对象、实例属性 id 都不一样
+computer3 = copy.deepcopy(computer)
+print('computer id = ', id(computer), 'computer3 id = ', id(computer3))
+print('desk id = ', id(computer.desk), 'desk3 id = ', id(computer3.desk))
+
+
+
+
+# 模块 ==  一个类（java中的类）就相当于一个模块
+# 倒入一个模块下的
+from math import pi
+print(pi)
+# 报错 ，因为只导入了math 中的 pi，没有导入math
+# print(math.pi)
+import math
+# 使用模块中的方法：
+print(math.pi)
+print(dir(math))
+
+
+if __name__ == '__main__':
+    print('只有运行 base.py 时，才会执行，就算被引入到别的模块也不会被执行')
+
+
+
+# 常用的内容模块
+import sys
+# 时间模块
+import time
+import calendar
+# 请求
+import urllib.request
+# json
+import json
+import logging
+# 正则相关
+import re
+# 访问操作系统服务功能的标准库
+import os
+class CommonUse:
+    def sys1(self):
+        # getsizeof() : Return the size of object in bytes
+        print(sys.getsizeof(11))
+        print(sys.getsizeof('aa'))
+        print(sys.getsizeof('aaa'))
+        print(sys.getsizeof('aaaa'))
+    def time1(self):
+        print(time.time())
+        print(time.localtime(time.time()))
+    def os1(self):
+        pass
+    def calendar1(self):
+        calendar.calendar()
+    def urllib1(self):
+        print(urllib.request.urlopen("http://www.baidu.com").read())
+    def json1(self):
+        print(json.load())
+    def logging1(self):
+        logging.info("logging  info ~")
+
+
+cu = CommonUse()
+cu.sys1()
+cu.time1()
+# cu.urllib1()
+cu.logging1()
