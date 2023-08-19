@@ -700,6 +700,7 @@ class CommonUse:
     def time1(self):
         print(time.time())
         print(time.localtime(time.time()))
+        return time.time()
     def os1(self):
         pass
     def calendar1(self):
@@ -711,9 +712,20 @@ class CommonUse:
     def logging1(self):
         logging.info("logging  info ~")
 
-
 cu = CommonUse()
 cu.sys1()
-cu.time1()
+# cu.time1()
 # cu.urllib1()
 cu.logging1()
+
+print('=========================')
+import schedule
+def schedul1():
+    schedule.every(1).seconds.do(cu.time1)
+    while True:
+        # 执行任务
+        schedule.run_pending()
+        time.sleep(1)
+
+schedul1()
+
