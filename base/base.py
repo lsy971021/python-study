@@ -454,6 +454,11 @@ print(fun1(n1,n2),end='\t')
 
 print(n1,n2)
 
+# 实参 ： * 使用
+ns = [1,2]
+print("fun1(*ns):",fun1(*ns))
+
+
 # * == java中的 ...args  ,代表是一个元组
 def fun2(*args):
     print(args)
@@ -518,7 +523,7 @@ class Student:
 
     # 实例方法 ，类外面定义的称为函数
     def getName(self):
-        print(name)
+        print(self.name)
 
     # 静态方法 ，不用加self , 使用类名直接访问 ： Student.staticMethod()
     @staticmethod
@@ -780,5 +785,18 @@ def schedule1():
         schedule.run_pending()
         time.sleep(1)
 
-schedule1()
+# schedule1()
 
+# 变量
+def variable():
+    # global ： 使用global声明，该变量就变成全局变量
+    global var
+    var = '这是一个在函数内定义的全局变量'
+    print('111')
+    return var
+
+variable()
+print(var)
+
+
+print('=========================')
