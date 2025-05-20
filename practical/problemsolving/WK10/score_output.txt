@@ -1,0 +1,7 @@
+Jobs,Steve,85.3
+Gates,Bill,9.3
+Musk,Elon,57.3
+Hopper,Grace,76.3
+Turing,Alan,91.7
+Lovelace,Ada,100.0
+von Neumann,John,87.0
