@@ -1,0 +1,6 @@
+Honda Civic 2020 5 5 12000
+Kia Cerato 2013 4 5 9500
+Holden Astra 2012 5 5 28500
+Kia Carnival 2021 5 8 8300
+Hyundai i30 2009 3 5 31200
+Ford Focus 2010 4 5 30500
